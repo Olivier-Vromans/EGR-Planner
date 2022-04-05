@@ -1,12 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, SafeAreaView, Pressable, Image, TextInput } from 'react-native';
-import leaf from './assets/leaf.png';
+import leaf from '../assets/leaf.png';
 
-export default function App(props) {
-  const [text, onChangeText] = React.useState();
-  const { onPress, title = '>' } = props;
+export default function Home({navigation}) {
+  const [origin, onChangeOrigin] = React.useState();
+  const [destination, onChangeDestination] = React.useState();
 
+
+  const pressHandler = () => {
+    navigation.navigate('Route')
+    }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -17,14 +21,14 @@ export default function App(props) {
       <Text style={styles.text2}>
         Vertrekpunt
       </Text>
-      <TextInput style={styles.input} onChangeText={onChangeText} value={text} placeholder={"Rotterdam Centraal"} />
+      <TextInput style={styles.input} onChangeText={onChangeOrigin} value={origin} placeholder={"Rotterdam Centraal"} />
       <Text style={styles.text2}>
         Bestemming
       </Text>
-      <TextInput style={styles.input} onChangeText={onChangeText} value={text} placeholder={"Beurs"}/>      
+      <TextInput style={styles.input} onChangeText={onChangeDestination} value={destination} placeholder={"Beurs"}/>      
       <StatusBar style="auto" />
-      <Pressable style={styles.button} onPress={onPress}>
-        <Text style={styles.textButton}>{title}</Text>
+      <Pressable style={styles.button} onPress={pressHandler}>
+        <Text style={styles.textButton}>{">"}</Text>
       </Pressable>
     </SafeAreaView>
   );
