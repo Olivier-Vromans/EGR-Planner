@@ -20,10 +20,5 @@
   "devDependencies": {
     "@babel/core": "^7.12.9"
   },
-  "splash": {
-    "image": "./assets/splash.png",
-    "resizeMode": "contain",
-    "backgroundColor": "#000000"
-  },  
   "private": true
 }
