@@ -3,10 +3,12 @@ import React from 'react';
 import reactDom from 'react-dom';
 import { StyleSheet, Text, SafeAreaView, Pressable, Image, TextInput } from 'react-native';
 import leaf from './assets/leaf.png';
+import Navigator from "./Routes/homeStack.js"
 
 export default function App(props) {
   const [text, onChangeText] = React.useState();
   const { onPress, title = '>' } = props;
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -24,7 +26,7 @@ export default function App(props) {
       <TextInput style={styles.input} onChangeText={onChangeText} value={text} placeholder={"Beurs"}/>      
       <StatusBar style="auto" />
       <Pressable style={styles.button} onPress={onPress}>
-      <Text style={styles.textButton}>{title}</Text>
+        <Text style={styles.textButton}>{title}</Text>
       </Pressable>
     </SafeAreaView>
   );
