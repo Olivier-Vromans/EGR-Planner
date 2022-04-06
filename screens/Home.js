@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, SafeAreaView, Pressable, Image, TextInput } from 'react-native';
 import leaf from '../assets/leaf.png';
+import { Button } from 'react-native-web';
 
 export default function Home({ navigation }) {
   const [origin, onChangeOrigin] = React.useState(String);
@@ -27,7 +28,7 @@ export default function Home({ navigation }) {
       <StatusBar style="auto" />
       <Pressable style={styles.button} onPress={() => {
         //Check if origin and destination is not empty
-        if(origin !== '' && destination !== ''){
+        if (origin !== '' && destination !== '') {
           /* Navigate to the Route route with params */
           navigation.navigate('Route', {
             origin: origin,
@@ -37,6 +38,9 @@ export default function Home({ navigation }) {
       }}>
         <Text style={styles.textButton}>{">"}</Text>
       </Pressable>
+      <Button onPress={() => {
+        navigation.navigate("Map")
+      }} title="Go To map Page" />
     </SafeAreaView>
   );
 }
