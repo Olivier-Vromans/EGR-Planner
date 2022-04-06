@@ -8,7 +8,7 @@ const screens = {
         screen: Home
     },
     Route: {
-        screen: Route
+        screen: Route,
     }
 }
 

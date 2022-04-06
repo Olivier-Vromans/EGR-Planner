@@ -1,20 +1,18 @@
+import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
 import { StyleSheet, Text, SafeAreaView, Pressable, Image, TextInput } from 'react-native';
 import leaf from '../assets/leaf.png';
 
-export default function Home({navigation}) {
-  const [origin, onChangeOrigin] = React.useState();
-  const [destination, onChangeDestination] = React.useState();
+export default function Home({ navigation }) {
+  const [origin, onChangeOrigin] = React.useState(String);
+  const [destination, onChangeDestination] = React.useState(String);
 
-
-  const pressHandler = () => {
-    navigation.navigate('Route')
-    }
+  console.log(origin);
+  console.log(destination);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Image source={leaf}/>
+      <Image source={leaf} />
       <Text style={styles.text}>
         EGR-Planner
       </Text>
@@ -25,9 +23,18 @@ export default function Home({navigation}) {
       <Text style={styles.text2}>
         Bestemming
       </Text>
-      <TextInput style={styles.input} onChangeText={onChangeDestination} value={destination} placeholder={"Beurs"}/>      
+      <TextInput style={styles.input} onChangeText={onChangeDestination} value={destination} placeholder={"Beurs"} />
       <StatusBar style="auto" />
-      <Pressable style={styles.button} onPress={pressHandler}>
+      <Pressable style={styles.button} onPress={() => {
+        //Check if origin and destination is not empty
+        if(origin !== '' && destination !== ''){
+          /* Navigate to the Route route with params */
+          navigation.navigate('Route', {
+            origin: origin,
+            destination: destination
+          })
+        }
+      }}>
         <Text style={styles.textButton}>{">"}</Text>
       </Pressable>
     </SafeAreaView>
@@ -46,7 +53,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     marginBottom: 30,
   },
-  text2:{
+  text2: {
     paddingTop: 10,
     color: '#000',
     fontSize: 20,
@@ -59,7 +66,7 @@ const styles = StyleSheet.create({
     minWidth: 250,
     borderRadius: 4,
   },
-  button:{
+  button: {
     backgroundColor: '#28D8A1',
     alignSelf: 'flex-end',
     marginRight: 83,
@@ -67,7 +74,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 4,
   },
-  textButton:{
+  textButton: {
     color: '#fff',
   },
 });
