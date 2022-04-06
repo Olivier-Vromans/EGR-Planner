@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, SafeAreaView, Pressable, Image, TextInput } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, Pressable, Image, TextInput, Button } from 'react-native';
 import leaf from '../assets/leaf.png';
-import { Button } from 'react-native-web';
 
 export default function Home({ navigation }) {
   const [origin, onChangeOrigin] = React.useState(String);
@@ -38,9 +37,9 @@ export default function Home({ navigation }) {
       }}>
         <Text style={styles.textButton}>{">"}</Text>
       </Pressable>
-      <Button onPress={() => {
-        navigation.navigate("Map")
-      }} title="Go To map Page" />
+      <Button title="Go to the Map page" onPress={() => {
+        navigation.navigate('Map')
+      }} />
     </SafeAreaView>
   );
 }
