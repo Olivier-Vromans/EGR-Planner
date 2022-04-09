@@ -8,9 +8,6 @@ const screens = {
     Home:{
         screen: Home
     },
-    Route: {
-        screen: Route,
-    },
     Map: {
         screen: Map
     }

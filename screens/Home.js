@@ -29,7 +29,7 @@ export default function Home({ navigation }) {
         //Check if origin and destination is not empty
         if (origin !== '' && destination !== '') {
           /* Navigate to the Route route with params */
-          navigation.navigate('Route', {
+          navigation.navigate('Map', {
             origin: origin,
             destination: destination
           })
