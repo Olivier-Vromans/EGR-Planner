@@ -30,8 +30,8 @@ export default function Home({ navigation }) {
         if (origin !== '' && destination !== '') {
           /* Navigate to the Route route with params */
           navigation.navigate('Map', {
-            origin: origin,
-            destination: destination
+            origin: "zintele 4",
+            destination: "Wijnhaven 99"
           })
         }
       }}>

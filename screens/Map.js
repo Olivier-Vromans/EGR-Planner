@@ -6,9 +6,6 @@ export default function Map({ route, navigation }) {
     //Get the origin and destination from the home page
     let tempOrigin = navigation.getParam("origin")
     let temoDestination = navigation.getParam("destination")
-    // TODO remove when done now just testing
-    tempOrigin = "zintele 4"
-    temoDestination = "Wijnhaven 99"
 
     // add %20 instead of space and end with .json for the api
     const origin = tempOrigin.replace(/ /g, "%20").concat(".json")
