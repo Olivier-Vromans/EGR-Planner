@@ -30,15 +30,18 @@ export default function Home({ navigation }) {
         if (origin !== '' && destination !== '') {
           /* Navigate to the Route route with params */
           navigation.navigate('Map', {
-            origin: "zintele 4",
-            destination: "Wijnhaven 99"
+            origin: origin,
+            destination: destination
           })
         }
       }}>
         <Text style={styles.textButton}>{">"}</Text>
       </Pressable>
       <Button title="Go to the Map page" onPress={() => {
-        navigation.navigate('Map')
+        navigation.navigate('Map', {
+          origin: "zintele 4",
+          destination: "Wijnhaven 99"
+        })
       }} />
     </SafeAreaView>
   );
