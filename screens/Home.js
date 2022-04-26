@@ -1,13 +1,14 @@
-import * as React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, SafeAreaView, Pressable, Image, TextInput, Button } from 'react-native';
 import leaf from '../assets/leaf.png';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+
 
 export default function Home({ navigation }) {
   const [origin, onChangeOrigin] = React.useState(String);
   const [destination, onChangeDestination] = React.useState(String);
 
-  console.log(origin);
   console.log(destination);
 
   return (
@@ -19,10 +20,44 @@ export default function Home({ navigation }) {
       <Text style={styles.text2}>
         Vertrekpunt
       </Text>
-      <TextInput style={styles.input} onChangeText={onChangeOrigin} value={origin} placeholder={"Rotterdam Centraal"} />
+      <GooglePlacesAutocomplete
+        placeholder='Location'
+        minLength={2}
+        autoFocus={true}
+        returnKeyType={'default'}
+        fetchDetails={true}
+        autoFillOnNotFound={true}
+        onPress={(data, details = null) => {
+          // 'details' is provided when fetchDetails = true
+          onChangeOrigin(data.description)
+        }}
+        query={{
+          key: 'AIzaSyADZtwlvQuxxtgjZ6YcSyDQdC7KKq0A3pY',
+          language: 'nl',
+        }}
+        styles={styles.input}
+      />
+      {/* <TextInput style={styles.input} onChangeText={onChangeOrigin} value={origin} placeholder={"Rotterdam Centraal"} /> */}
       <Text style={styles.text2}>
         Bestemming
       </Text>
+      {/* <GooglePlacesAutocomplete
+      placeholder='Location'
+      minLength={2}
+      autoFocus={true}
+      returnKeyType={'default'}
+      fetchDetails={true}
+      autoFillOnNotFound={true}
+      onPress={(data, details = null) => {
+        // 'details' is provided when fetchDetails = true
+        onChangeDestination(data.description)
+      }}
+      query={{
+        key: 'AIzaSyADZtwlvQuxxtgjZ6YcSyDQdC7KKq0A3pY',
+        language: 'nl',
+      }}
+      styles={styles.input}
+    /> */}
       <TextInput style={styles.input} onChangeText={onChangeDestination} value={destination} placeholder={"Beurs"} />
       <StatusBar style="auto" />
       <Pressable style={styles.button} onPress={() => {
