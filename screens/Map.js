@@ -1,3 +1,5 @@
+import { StatusBar } from 'expo-status-bar';
+import { useEffect, useState } from 'react';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 
@@ -10,25 +12,46 @@ export default function Map({ route, navigation }) {
     // add %20 instead of space and end with .json for the api
     const origin = tempOrigin.replace(/ /g, "%20")
     const destination = temoDestination.replace(/ /g, "%20")
-    
+    const [originGeoCode, setOriginGeoCode] = useState({})
+    const [destinationGeoCode, setDestinationGeoCode] = useState({})
+
+
     // variables for the api key and url's
     const api = "AIzaSyADZtwlvQuxxtgjZ6YcSyDQdC7KKq0A3pY"
-    const url = "https://maps.googleapis.com/maps/api/directions/json?"
+    const GeocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json?address="
 
-    // call the function
-    GETInfo()
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const result = await fetch(GeocodeUrl + origin + "&key=" + api)
+                const body = await result.json()
+                setOriginGeoCode(body.results[0].geometry.location)
+            } catch (err) {
 
-    async function GETInfo() {        
-        console.log(url + "origin=" + origin + "&destination=" + destination + "&key=" + api)
-        // // fetch route
-        // await fetch(url + "origin=" + origin + "&destination=" + destination + "&key=" + api)
-        //     .then(response => response.json())
-        //     .then(data => console.log(data))
-        //     .catch(err => console.log(err))
-    }
+            }
+        }
+        // call the async fetchData function
+        fetchData()
+    }, [])
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const result = await fetch(GeocodeUrl + destination + "&key=" + api)
+                const body = await result.json()
+                setDestinationGeoCode(body.results[0].geometry.location)
+            } catch (err) {
 
-    console.log(origin);
-    console.log(destination)
+            }
+        }
+        // call the async fetchData function
+        fetchData()
+    }, [])
+
+
+
+
+    console.log(tempOrigin);
+    console.log(temoDestination)
     return (
         <MapView
             style={{ flex: 1 }}
@@ -40,13 +63,26 @@ export default function Map({ route, navigation }) {
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421
             }}>
-                <MapViewDirections
-                    origin={origin}
-                    destination={destination}
-                    apikey={api}
-                    strokeWidth={5}
-                    strokeColor="green"
-                    />
+            <Marker coordinate={
+                {
+                    latitude: originGeoCode.lat,
+                    longitude: originGeoCode.lng,
+                }
+            } />
+            <Marker coordinate={
+                {
+                    latitude: destinationGeoCode.lat,
+                    longitude: destinationGeoCode.lng,
+                }
+            } />
+            <MapViewDirections
+                origin={origin}
+                destination={destination}
+                apikey={api}
+                strokeWidth={5}
+                strokeColor="green"
+            />
+            <StatusBar style="dark" />
         </MapView>
     )
 }
