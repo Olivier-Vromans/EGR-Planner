@@ -9,8 +9,6 @@ export default function Home({ navigation }) {
   const [origin, onChangeOrigin] = React.useState(String);
   const [destination, onChangeDestination] = React.useState(String);
 
-  console.log(destination);
-
   return (
     <SafeAreaView style={styles.container}>
       <Image source={leaf} />
@@ -20,7 +18,7 @@ export default function Home({ navigation }) {
       <Text style={styles.text2}>
         Vertrekpunt
       </Text>
-      <GooglePlacesAutocomplete
+      {/* <GooglePlacesAutocomplete
         placeholder='Location'
         minLength={2}
         autoFocus={true}
@@ -36,8 +34,8 @@ export default function Home({ navigation }) {
           language: 'nl',
         }}
         styles={styles.input}
-      />
-      {/* <TextInput style={styles.input} onChangeText={onChangeOrigin} value={origin} placeholder={"Rotterdam Centraal"} /> */}
+      /> */}
+      <TextInput style={styles.input} onChangeText={onChangeOrigin} value={origin} placeholder={"Rotterdam Centraal"} />
       <Text style={styles.text2}>
         Bestemming
       </Text>
@@ -59,7 +57,6 @@ export default function Home({ navigation }) {
       styles={styles.input}
     /> */}
       <TextInput style={styles.input} onChangeText={onChangeDestination} value={destination} placeholder={"Beurs"} />
-      <StatusBar style="auto" />
       <Pressable style={styles.button} onPress={() => {
         //Check if origin and destination is not empty
         if (origin !== '' && destination !== '') {
@@ -78,6 +75,7 @@ export default function Home({ navigation }) {
           destination: "Wijnhaven 99"
         })
       }} />
+      <StatusBar style="dark" />
     </SafeAreaView>
   );
 }
