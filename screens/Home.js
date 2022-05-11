@@ -201,6 +201,9 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     textAlign:'center',
     color: '#28D8A1',
+    textShadowColor: 'rgba(40, 216, 116, 0.50)',
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 1,
   },
 
   inputFieldText: {
@@ -221,18 +224,26 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#28D8A1',
-    textAlign: 'center',
+
     alignSelf: 'center',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+
     height: 40,
     margin: 12,
-    borderWidth: 1,
     padding: 10,
     minWidth: 350,
     maxWidth: 350,
+
     borderRadius: 4,
-    borderColor: '#ececec',
-    textAlign: 'center',
-    textAlignVertical: 'center',
+    shadowColor: "#28D8A1",
+    shadowOffset: {
+	    width: 0,
+	    height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.00,
+    elevation: 12,
   },
   textButton: {
     color: '#fff',
