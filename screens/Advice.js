@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, SafeAreaView, ActivityIndicator, FlatList, View } from 'react-native';
+import { Text, SafeAreaView, ActivityIndicator, FlatList, View, Button } from 'react-native';
 import Card from '../src/Card.js';
 
 export default function Advice({ route, navigation }) {
@@ -90,13 +90,20 @@ export default function Advice({ route, navigation }) {
             {loading ? <ActivityIndicator size="large" /> :
                 <View>
                     <Text>Done Loading</Text>
-                    {/* <FlatList
+                    <FlatList
                         data={routes}
                         renderItem={({ item }) => (
                             <Text>{item.legs[0].duration.text}</Text>
                         )}
-                    /> */}
+                        keyExtractor={item => item.legs[0].duration.value}
+                    />
                     {/* <Text>{JSON.stringify(routes[0].legs[0].duration.text)}</Text> */}
+                    <Button title="Go to the Map page" onPress={() => {
+                        navigation.navigate('Map', {
+                            origin: origin,
+                            destination: destination
+                        })
+                    }} />
                 </View>
             }
             <StatusBar style="dark" />
