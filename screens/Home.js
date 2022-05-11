@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, SafeAreaView, Pressable, Image, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, Pressable, Image, TextInput, Button } from 'react-native';
 import leaf from '../assets/leaf.png';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
@@ -12,21 +12,19 @@ export default function Home({ navigation }) {
   console.log(destination);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Image source={leaf} />
-      <Text style={styles.text}>
-        EGR-Planner
-      </Text>
-      <Text style={styles.text2}>
-        Vertrekpunt
-      </Text>
+    <View style={styles.homeWrapper}>
+      {/* <Image source={leaf} style={styles.logoImage}/> */}
+      <Text style={styles.titleText}>EGR-Planner</Text>
+      <Text style={styles.inputFieldText}>Vertrekpunt</Text> 
+     
       <GooglePlacesAutocomplete
         placeholder='Location'
-        minLength={2}
-        autoFocus={true}
+        minLength={1}
         returnKeyType={'default'}
         fetchDetails={true}
         autoFillOnNotFound={true}
+        enablePoweredByContainer={false}
+        suppressDefaultStyles={true}
         onPress={(data, details = null) => {
           // 'details' is provided when fetchDetails = true
           onChangeOrigin(data.description)
@@ -35,13 +33,53 @@ export default function Home({ navigation }) {
           key: 'AIzaSyADZtwlvQuxxtgjZ6YcSyDQdC7KKq0A3pY',
           language: 'nl',
         }}
-        styles={styles.input}
+        styles={{
+          container:{
+            flex:0,
+          },
+          textInputContainer: {
+            height: 40,
+            margin: 12,
+            borderWidth: 1,
+            padding: 10,
+            minWidth: 250,
+            maxWidth: 250,
+            borderRadius: 4,
+            borderColor:'#ececec',
+            alignSelf:'center',
+          },
+          poweredContainer: {
+            alignItems: 'center',
+            borderBottomRightRadius: 5,
+            borderBottomLeftRadius: 5,
+            borderColor: '#c8c7cc',
+            borderTopWidth: 0.5,
+          },
+          powered: {},
+          listView: {},
+          row: {
+            backgroundColor: '#FFFFFF',
+            padding: 13,
+            height: 45,
+            flexDirection: 'row',
+          },
+          separator: {
+            height: 0.5,
+            backgroundColor: '#c8c7cc',
+          },
+          description: {},
+          loader: {
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            height: 20,
+          },
+        }}
       />
-      {/* <TextInput style={styles.input} onChangeText={onChangeOrigin} value={origin} placeholder={"Rotterdam Centraal"} /> */}
-      <Text style={styles.text2}>
-        Bestemming
-      </Text>
-      {/* <GooglePlacesAutocomplete
+      
+      <Text style={styles.inputFieldText}>Bestemming</Text>
+      
+      {/* 
+      <GooglePlacesAutocomplete
       placeholder='Location'
       minLength={2}
       autoFocus={true}
@@ -57,9 +95,13 @@ export default function Home({ navigation }) {
         language: 'nl',
       }}
       styles={styles.input}
-    /> */}
-      <TextInput style={styles.input} onChangeText={onChangeDestination} value={destination} placeholder={"Beurs"} />
+    /> 
+    */}
+
+      <TextInput style={styles.textInputContainer} onChangeText={onChangeDestination} value={destination} placeholder={"Beurs"} />
+
       <StatusBar style="auto" />
+
       <Pressable style={styles.button} onPress={() => {
         //Check if origin and destination is not empty
         if (origin !== '' && destination !== '') {
@@ -72,40 +114,40 @@ export default function Home({ navigation }) {
       }}>
         <Text style={styles.textButton}>{">"}</Text>
       </Pressable>
+
       <Button title="Go to the Map page" onPress={() => {
         navigation.navigate('Map', {
           origin: "zintele 4",
           destination: "Wijnhaven 99"
         })
       }} />
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  homeWrapper: {
     backgroundColor: '#fff',
+    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
   },
-  text: {
-    color: '#28D8A1',
-    fontSize: 32,
-    marginBottom: 30,
+
+  titleText:{
+    fontSize: 42,
   },
-  text2: {
-    paddingTop: 10,
-    color: '#000',
-    fontSize: 20,
+
+  inputFieldText: {
+    marginLeft: 12,
   },
-  input: {
+
+  textInputContainer: {
     height: 40,
     margin: 12,
     borderWidth: 1,
     padding: 10,
     minWidth: 250,
     borderRadius: 4,
+    borderColor:'#ececec',
   },
   button: {
     backgroundColor: '#28D8A1',
