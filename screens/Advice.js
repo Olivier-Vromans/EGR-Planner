@@ -5,39 +5,10 @@ import Card from '../src/Card.js';
 
 export default function Advice({ route, navigation }) {
     const [loading, setLoading] = useState(true)
-    const mode = ["walking"
-        , "driving"
-        // ,"walking", "bicycling", "transit"
+    const mode = ["driving"
+        ,"walking", "bicycling", "transit"
     ]
-    const [routes, setRoutes] = useState([
-        //     {
-        //     bounds: {},
-        //     copyrights: "Map data ©2022",
-        //     legs: [
-        //         {
-        //             distance: {},
-        //             duration: {
-        //                 text: "20000 min test.",
-        //                 value: 1457,
-        //             },
-        //             end_address: "Wijnhaven 99, 3011 WN Rotterdam, Nederland",
-        //             end_location: {},
-        //             start_address: "Zintele 4, 2642 JS Pijnacker, Nederland",
-        //             start_location: {
-        //                 lat: 52.0076732,
-        //                 lng: 4.4478421,
-        //             },
-        //             steps: [],
-        //             traffic_speed_entry: [],
-        //             via_waypoint: [],
-        //         }
-        //     ],
-        //     overview_polyline: {},
-        //     summary: "N471 en G.K. van Hogendorpweg/S112",
-        //     warnings: [],
-        //     waypoint_order: [],
-        // }
-    ])
+    const [routes, setRoutes] = useState([])
 
     //Get the origin and destination from the home page
     let tempOrigin = navigation.getParam("origin")
@@ -57,16 +28,20 @@ export default function Advice({ route, navigation }) {
             try {
                 const urls = mode.map(travelMode => url + params + "&mode=" + travelMode + key)
                 console.log(urls);
-                await Promise.all(urls.map(url =>
-                    fetch(url).then(resp => resp.json())
-                )).then(data => {
-                    let r = data[0].routes
-                    for (let route of r) {
-                        console.log(route.legs[0].duration.text)
-                        let arr = routes.concat(route)
+                await Promise.all(urls.map(url => fetch(url)))
+                    .then((responses) => Promise.all(responses.map((res) => res.json())))
+                    .then(directionResults => {
+                        // console.log(data);
+                        let arr = [];
+                        for (let directionResult of directionResults) {
+                            for (let route of directionResult.routes) {
+                                console.log(route.legs[0].duration.text)
+                                arr.push(route)
+                            }
+                        }
                         setRoutes(arr)
-                    }
-                }).then(setLoading(false))
+                    })
+                    .then(setLoading(false))
                 // constvc result = await fetch(GeocodeUrl + destination + "&key=" + api)
                 // const body = await result.json()
                 // setDestinationGeoCode(body.results[0].geometry.location)
@@ -79,6 +54,7 @@ export default function Advice({ route, navigation }) {
         fetchData()
 
     }, [])
+    console.log(Object.keys(routes).length)
 
     if (!loading) {
         // console.log(Object.keys(routes).length)
@@ -97,7 +73,7 @@ export default function Advice({ route, navigation }) {
                         )}
                         keyExtractor={item => item.legs[0].duration.value}
                     />
-                    {/* <Text>{JSON.stringify(routes[0].legs[0].duration.text)}</Text> */}
+                    {/* <Text>{JSON.stringify(routes)}</Text> */}
                     <Button title="Go to the Map page" onPress={() => {
                         navigation.navigate('Map', {
                             origin: origin,
