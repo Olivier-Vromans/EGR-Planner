@@ -61,7 +61,7 @@ export default function Home({ navigation }) {
         //Check if origin and destination is not empty
         if (origin !== '' && destination !== '') {
           /* Navigate to the Route route with params */
-          navigation.navigate('Advice', {
+          navigation.navigate('Advies', {
             origin: origin,
             destination: destination
           })
