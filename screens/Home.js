@@ -9,8 +9,6 @@ export default function Home({ navigation }) {
   const [origin, onChangeOrigin] = React.useState(String);
   const [destination, onChangeDestination] = React.useState(String);
 
-  console.log(destination);
-
   return (
     <View style={styles.homeWrapper}>
       <StatusBar style="auto" />
@@ -182,13 +180,11 @@ export default function Home({ navigation }) {
           console.log('empty input')
         }
       }}>
-        <Text style={styles.textButton}>Vertrek!</Text>
-      </Text>
 
       <Text style={styles.button} onPress={() => {
         navigation.navigate('Map', {
           origin: "zintele 4",
-          destination: "Wijnhaven 99"
+          destination: "wijnhaven 99"
         })
       }}>
         <Text style={styles.textButton}>Go to the Map page</Text>

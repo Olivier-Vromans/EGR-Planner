@@ -1,15 +1,18 @@
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 import Home from "../screens/Home.js";
-import Route from "../screens/Route.js"
 import Map from "../screens/Map.js";
+import Advice from "../screens/Advice.js"
 
 const screens = {
-    Home:{
+    Hoofdpagina:{
         screen: Home
     },
-    Map: {
+    Route: {
         screen: Map
+    },
+    Advies: {
+        screen: Advice
     }
 }
 
