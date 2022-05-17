@@ -2,14 +2,17 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
+import { Dimensions } from 'react-native';
 
 export default function Map({ route, navigation }) {
+    const { width, height } = Dimensions.get('window');
     //Get the origin and destination from the home page
     let tempOrigin = navigation.getParam("origin")
     let temoDestination = navigation.getParam("destination")
-
+    
     // tempOrigin = "zintele 4"
     // add %20 instead of space and end with .json for the api
+    const mode = navigation.getParam("mode")
     const origin = tempOrigin.replace(/ /g, "%20")
     const destination = temoDestination.replace(/ /g, "%20")
     const [originGeoCode, setOriginGeoCode] = useState({})
@@ -47,11 +50,6 @@ export default function Map({ route, navigation }) {
         fetchData()
     }, [])
 
-
-
-
-    console.log(tempOrigin);
-    console.log(temoDestination)
     return (
         <MapView
             style={{ flex: 1 }}
@@ -80,6 +78,7 @@ export default function Map({ route, navigation }) {
                 destination={destination}
                 apikey={api}
                 strokeWidth={5}
+                mode={mode}
                 strokeColor="green"
             />
             <StatusBar style="dark" />

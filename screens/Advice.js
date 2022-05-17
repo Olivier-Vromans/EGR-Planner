@@ -5,9 +5,7 @@ import Card from '../src/Card.js';
 
 export default function Advice({ route, navigation }) {
     const [loading, setLoading] = useState(true)
-    const mode = ["driving"
-        ,"walking", "bicycling", "transit"
-    ]
+    const mode = ["driving", "transit", "bicycling", "walking"]
     const [routes, setRoutes] = useState([])
 
     //Get the origin and destination from the home page
@@ -20,7 +18,7 @@ export default function Advice({ route, navigation }) {
     const destination = temoDestination.replace(/ /g, "%20")
 
     const url = "https://maps.googleapis.com/maps/api/directions/json?"
-    const params = `origin=${origin}&destination=${destination}&alternatives=true`
+    const params = `origin=${origin}&destination=${destination}`
     const key = "&key=AIzaSyADZtwlvQuxxtgjZ6YcSyDQdC7KKq0A3pY"
 
     useEffect(() => {
@@ -42,9 +40,6 @@ export default function Advice({ route, navigation }) {
                         setRoutes(arr)
                     })
                     .then(setLoading(false))
-                // constvc result = await fetch(GeocodeUrl + destination + "&key=" + api)
-                // const body = await result.json()
-                // setDestinationGeoCode(body.results[0].geometry.location)
             } catch (err) {
 
             }
@@ -54,18 +49,15 @@ export default function Advice({ route, navigation }) {
         fetchData()
 
     }, [])
-    console.log(Object.keys(routes).length)
-
+    
     if (!loading) {
-        // console.log(Object.keys(routes).length)
-        // console.log(typeof(routes))
+        console.log(routes[0]);
     }
 
     return (
         <SafeAreaView>
             {loading ? <ActivityIndicator size="large" /> :
                 <View>
-                    <Text>Done Loading</Text>
                     <FlatList
                         data={routes}
                         renderItem={({ item }) => (
@@ -75,9 +67,38 @@ export default function Advice({ route, navigation }) {
                     />
                     {/* <Text>{JSON.stringify(routes)}</Text> */}
                     <Button title="Go to the Map page" onPress={() => {
+                        navigation.navigate('Route', {
+                            origin: origin,
+                            destination: destination,
+                            mode: mode[1]
+                        })
+                    }} />
+                    <Button title="Driving" onPress={() => {
+                        navigation.navigate('Route', {
+                            origin: origin,
+                            destination: destination,
+                            mode: mode[0]
+                        })
+                    }} />
+                    <Button title="OV" onPress={() => {
+                        navigation.navigate('Route', {
+                            origin: origin,
+                            destination: destination,
+                            mode: mode[1]
+                        })
+                    }} />
+                    <Button title="Fiets" onPress={() => {
+                        navigation.navigate('Route', {
+                            origin: origin,
+                            destination: destination,
+                            mode: mode[2]
+                        })
+                    }} />
+                    <Button title="Lopen" onPress={() => {
                         navigation.navigate('Map', {
                             origin: origin,
-                            destination: destination
+                            destination: destination,
+                            mode: mode[3]
                         })
                     }} />
                 </View>

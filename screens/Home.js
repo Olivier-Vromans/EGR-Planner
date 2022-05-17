@@ -70,7 +70,7 @@ export default function Home({ navigation }) {
         <Text style={styles.textButton}>{">"}</Text>
       </Pressable>
       <Button title="Go to the Map page" onPress={() => {
-        navigation.navigate('Advice', {
+        navigation.navigate('Advies', {
           origin: "zintele 4",
           destination: "wijnhaven 99"
         })

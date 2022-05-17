@@ -5,13 +5,13 @@ import Map from "../screens/Map.js";
 import Advice from "../screens/Advice.js"
 
 const screens = {
-    Home:{
+    Hoofdpagina:{
         screen: Home
     },
-    Map: {
+    Route: {
         screen: Map
     },
-    Advice: {
+    Advies: {
         screen: Advice
     }
 }
