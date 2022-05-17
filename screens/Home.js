@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Pressable, Image, TextInput, Button } from 'react-native';
-import leaf from '../assets/leaf.png';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import  leaf  from '../assets/leaf.png'
 
 
 export default function Home({ navigation }) {
@@ -14,9 +14,12 @@ export default function Home({ navigation }) {
   return (
     <View style={styles.homeWrapper}>
       <StatusBar style="auto" />
-      <Text style={styles.titleText}>EGR-Planner</Text>
-      {/* <Image source={leaf} style={styles.logoImage}/> */}
-      {/* <Text style={styles.inputFieldText}>Vertrekpunt</Text>  */}
+      <Image 
+        source={leaf} 
+        style={styles.logoImage}
+        />
+      {/* <Text style={styles.titleText}>Kies je route!</Text> */}
+      <Text style={styles.inputFieldText}>Vertrekpunt</Text> 
      
       <GooglePlacesAutocomplete
         // Placeholder
@@ -49,11 +52,13 @@ export default function Home({ navigation }) {
           textInputContainer: {
             height: 40,
             margin: 12,
-            borderWidth: 1,
+            marginTop: 0,
+            //borderWidth: 1,
             padding: 10,
             minWidth: 350,
             maxWidth: 350,
-            borderRadius: 4,
+            borderBottomWidth: 1,
+            //borderRadius: 4,
             borderColor:'#ececec',
             alignSelf:'center',
           },
@@ -87,7 +92,7 @@ export default function Home({ navigation }) {
         }}
       />
       
-      {/* <Text style={styles.inputFieldText}>Bestemming</Text> */}
+      <Text style={styles.inputFieldText}>Bestemming</Text>
       
       <GooglePlacesAutocomplete
       // Placeholder
@@ -120,11 +125,13 @@ export default function Home({ navigation }) {
         textInputContainer: {
           height: 40,
           margin: 12,
-          borderWidth: 1,
+          marginTop: 0,
+          //borderWidth: 1,
           padding: 10,
           minWidth: 350,
           maxWidth: 350,
-          borderRadius: 4,
+          borderBottomWidth: 1,
+          //borderRadius: 4,
           borderColor:'#ececec',
           alignSelf:'center',
         },
@@ -171,6 +178,9 @@ export default function Home({ navigation }) {
             destination: destination
           })
         }
+        else{
+          console.log('empty input')
+        }
       }}>
         <Text style={styles.textButton}>Vertrek!</Text>
       </Text>
@@ -196,19 +206,23 @@ const styles = StyleSheet.create({
   },
 
   titleText:{
-    fontSize: 42,
-    marginTop: 100,
+    fontSize: 28,
+    marginTop: 10,
     marginBottom: 25,
-    textAlign:'center',
+    marginLeft: 32, 
+    textAlign: 'left',
     color: '#28D8A1',
     textShadowColor: 'rgba(40, 216, 116, 0.50)',
-    textShadowOffset: { width: -1, height: 1 },
-    textShadowRadius: 1,
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 3
+    ,
   },
 
   inputFieldText: {
-    //textAlign:'center',
+    color: '#28D8A1',
     marginLeft: 35,
+    marginTop: 5,
+    marginBottom: 6,
   },
 
   textInputContainer: {
@@ -222,6 +236,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderColor: '#ececec',
   },
+  
   button: {
     backgroundColor: '#28D8A1',
 
@@ -239,14 +254,22 @@ const styles = StyleSheet.create({
     shadowColor: "#28D8A1",
     shadowOffset: {
 	    width: 0,
-	    height: 12,
+	    height: 10,
     },
     shadowOpacity: 0.58,
-    shadowRadius: 16.00,
-    elevation: 12,
+    shadowRadius: 13.00,
+    elevation: 10,
   },
   textButton: {
     color: '#fff',
   },
-});
 
+  logoImage:{
+    marginTop: 100,
+    alignSelf: 'center',
+    marginBottom: 32,
+    //marginLeft: 32,
+    width: 89.6,
+    height: 80,
+  },
+});
