@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Text, SafeAreaView, ActivityIndicator, FlatList, View, Button } from 'react-native';
-
+import Card from "../src/AdviceCards.js"
 
 export default function Advice({ route, navigation }) {
     const [loading, setLoading] = useState(true)
@@ -61,6 +61,7 @@ export default function Advice({ route, navigation }) {
         <SafeAreaView>
             {loading ? <ActivityIndicator size="large" /> :
                 <View>
+                    <Card />
                     <FlatList
                         data={routes}
                         renderItem={({ item }) => (
@@ -74,27 +75,6 @@ export default function Advice({ route, navigation }) {
                             origin: origin,
                             destination: destination,
                             mode: mode[0]
-                        })
-                    }} />
-                    <Button title="Driving" onPress={() => {
-                        navigation.navigate('Route', {
-                            origin: origin,
-                            destination: destination,
-                            mode: mode[0]
-                        })
-                    }} />
-                    <Button title="OV" onPress={() => {
-                        navigation.navigate('Route', {
-                            origin: origin,
-                            destination: destination,
-                            mode: mode[1]
-                        })
-                    }} />
-                    <Button title="Fiets" onPress={() => {
-                        navigation.navigate('Route', {
-                            origin: origin,
-                            destination: destination,
-                            mode: mode[2]
                         })
                     }} />
                 </View>
