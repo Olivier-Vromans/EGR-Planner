@@ -8,6 +8,7 @@ import  leaf  from '../assets/leaf.png'
 export default function Home({ navigation }) {
   const [origin, onChangeOrigin] = React.useState(String);
   const [destination, onChangeDestination] = React.useState(String);
+  const [licensePlate, setLicensePlate] = React.useState(String);
 
   return (
     <View style={styles.homeWrapper}>
@@ -164,16 +165,14 @@ export default function Home({ navigation }) {
         },
       }}
     /> 
-
-      {/* <TextInput style={styles.textInputContainer} onChangeText={onChangeDestination} value={destination} placeholder={"Beurs"} /> */}
-
       <Text style={styles.button} onPress={() => {
         //Check if origin and destination is not empty
         if (origin !== '' && destination !== '') {
           //Navigate to the Route route with params
           navigation.navigate('Advies', {
             origin: origin,
-            destination: destination
+            destination: destination,
+            licensePlate: licensePlate,
           })
         }
         else{
@@ -186,7 +185,8 @@ export default function Home({ navigation }) {
       <Text style={styles.button} onPress={() => {
         navigation.navigate('Advies', {
           origin: "zintele 4",
-          destination: "wijnhaven 99"
+          destination: "wijnhaven 99",
+          licensePlate: "8kkr09"
         })
       }}>
         <Text style={styles.textButton}>Go to the Map page</Text>

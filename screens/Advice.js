@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Text, SafeAreaView, ActivityIndicator, FlatList, View, Button } from 'react-native';
 import Card from "../src/AdviceCards.js"
+let CardComponents
 
 export default function Advice({ route, navigation }) {
     const [loading, setLoading] = useState(true)
@@ -51,24 +52,24 @@ export default function Advice({ route, navigation }) {
     }, [])
 
     if (!loading) {
-        console.log(routes[0]);
-        // const routeComponents = routes.map((route, index) => {
-        //     return 
-        // })
+        // console.log(routes[0]);
+        CardComponents = routes.map((route, index) =>{
+            return <Card 
+            navigation={navigation}
+            time={route.legs[0].duration.value}
+            mode={mode[index]}
+            distance={route.legs[0].distance.value}
+            key={mode[index]}
+            >
+            </Card>
+        })
     }
 
     return (
         <SafeAreaView>
             {loading ? <ActivityIndicator size="large" /> :
                 <View>
-                    <Card />
-                    <FlatList
-                        data={routes}
-                        renderItem={({ item }) => (
-                            <Text>{item.legs[0].duration.text}</Text>
-                        )}
-                        keyExtractor={item => item.legs[0].duration.value}
-                    />
+                    {CardComponents}
                     {/* <Text>{JSON.stringify(routes)}</Text> */}
                     <Button title="Go to the Map page" onPress={() => {
                         navigation.navigate('Route', {
