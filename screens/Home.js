@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import  leaf  from '../assets/leaf.png'
+
 
 
 export default function Home({ navigation }) {
@@ -17,9 +18,12 @@ export default function Home({ navigation }) {
         source={leaf} 
         style={styles.logoImage}
         />
+      
       {/* <Text style={styles.titleText}>Kies je route!</Text> */}
       <Text style={styles.titleText}>EGR</Text> 
       <Text style={styles.motto}>Verklein je ecologische voetafdruk </Text> 
+
+      <View style={styles.section}>
       <Text style={styles.inputFieldText}>Vertrekpunt</Text> 
      
       <GooglePlacesAutocomplete
@@ -193,6 +197,7 @@ export default function Home({ navigation }) {
       }}>
         <Text style={styles.textButton}>Go to the Map page</Text>
       </Text>
+      </View>
     </View>
   );
 }
@@ -203,6 +208,10 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     height: '100%',
     textAlign: 'center',
+  },
+  section: {
+    width: Dimensions.get('screen').width,
+    height: Dimensions.get('screen').height
   },
 
   titleText:{
@@ -225,10 +234,11 @@ const styles = StyleSheet.create({
   },
 
   inputFieldText: {
+    width: Dimensions.get('screen').width,
     color: '#28D8A1',
-    marginLeft: 10,
     marginTop: 5,
     marginBottom: 6,
+    paddingLeft:20
   },
 
   textInputContainer: {
@@ -245,11 +255,9 @@ const styles = StyleSheet.create({
   
   button: {
     backgroundColor: '#28D8A1',
-
     alignSelf: 'center',
     textAlign: 'center',
     textAlignVertical: 'center',
-
     height: 40,
     margin: 12,
     padding: 10,
