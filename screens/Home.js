@@ -1,14 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import  leaf  from '../assets/leaf.png'
 
-
 export default function Home({ navigation }) {
   const [origin, onChangeOrigin] = React.useState(String);
   const [destination, onChangeDestination] = React.useState(String);
   const [licensePlate, setLicensePlate] = React.useState(String);
+  
 
   return (
     <View style={styles.homeWrapper}>
@@ -184,7 +184,7 @@ export default function Home({ navigation }) {
 
       <Text style={styles.button} onPress={() => {
         navigation.navigate('Advies', {
-          origin: "zintele 4",
+          origin: "Bloementuin 8, naaldwijk",
           destination: "wijnhaven 99",
           licensePlate: "8kkr09"
         })

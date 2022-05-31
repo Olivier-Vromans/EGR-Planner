@@ -8,6 +8,7 @@ export default function Advice({ route, navigation }) {
     const [loading, setLoading] = useState(true)
     const mode = ["driving", "transit", "bicycling", "walking"]
     const [routes, setRoutes] = useState([])
+    const [busDistance, setBusDistance] = useState(0)
 
     //Get the origin and destination from the home page
     let tempOrigin = navigation.getParam("origin")
@@ -30,14 +31,23 @@ export default function Advice({ route, navigation }) {
                 await Promise.all(urls.map(url => fetch(url)))
                     .then((responses) => Promise.all(responses.map((res) => res.json())))
                     .then(directionResults => {
-                        // console.log(data);
                         let arr = [];
+                        let busArr = []
                         for (let directionResult of directionResults) {
                             for (let route of directionResult.routes) {
+                                for (let step of route.legs[0].steps) {
+                                    if (step.travel_mode === "TRANSIT") {
+                                        if (step.transit_details.line.vehicle.type === "BUS") {
+                                            console.log(step.transit_details.line.vehicle.type);
+                                            setBusDistance(busDistance + step.distance.value)
+                                        }
+                                    }
+                                }
                                 console.log(route.legs[0].duration.text)
                                 arr.push(route)
                             }
                         }
+                        // setBusTime(busArr)
                         setRoutes(arr)
                     })
                     .then(setLoading(false))
@@ -52,14 +62,16 @@ export default function Advice({ route, navigation }) {
     }, [])
 
     if (!loading) {
-        // console.log(routes[0]);
-        CardComponents = routes.map((route, index) =>{
-            return <Card 
-            navigation={navigation}
-            time={route.legs[0].duration.value}
-            mode={mode[index]}
-            distance={route.legs[0].distance.value}
-            key={mode[index]}
+        CardComponents = routes.map((route, index) => {
+            return <Card
+                navigation={navigation}
+                mode={mode[index]}
+                origin={origin}
+                destination={destination}
+                time={route.legs[0].duration.value}
+                busDistance={busDistance}
+                distance={route.legs[0].distance.value}
+                key={mode[index]}
             >
             </Card>
         })
