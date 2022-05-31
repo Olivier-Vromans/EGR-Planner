@@ -18,6 +18,8 @@ export default function Home({ navigation }) {
         style={styles.logoImage}
         />
       {/* <Text style={styles.titleText}>Kies je route!</Text> */}
+      <Text style={styles.titleText}>EGR</Text> 
+      <Text style={styles.motto}>Verklein je ecologische voetafdruk </Text> 
       <Text style={styles.inputFieldText}>Vertrekpunt</Text> 
      
       <GooglePlacesAutocomplete
@@ -204,21 +206,27 @@ const styles = StyleSheet.create({
   },
 
   titleText:{
-    fontSize: 28,
-    marginTop: 10,
-    marginBottom: 25,
-    marginLeft: 32, 
-    textAlign: 'left',
+    fontSize: 45,
+    textAlign: 'center',
     color: '#28D8A1',
+    fontWeight: 'bold',
     textShadowColor: 'rgba(40, 216, 116, 0.50)',
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 3
     ,
   },
 
+  motto:{
+    color: '#28D8A1',
+    textAlign: 'center',
+    marginBottom: 40,
+    fontWeight: 'bold',
+
+  },
+
   inputFieldText: {
     color: '#28D8A1',
-    marginLeft: 35,
+    marginLeft: 10,
     marginTop: 5,
     marginBottom: 6,
   },
@@ -263,9 +271,9 @@ const styles = StyleSheet.create({
   },
 
   logoImage:{
-    marginTop: 100,
+    marginTop: 75,
     alignSelf: 'center',
-    marginBottom: 32,
+    marginBottom: 0,
     //marginLeft: 32,
     width: 89.6,
     height: 80,
