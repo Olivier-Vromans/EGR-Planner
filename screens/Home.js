@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import  leaf  from '../assets/leaf.png'
 
@@ -17,7 +17,12 @@ export default function Home({ navigation }) {
         source={leaf} 
         style={styles.logoImage}
         />
+      
       {/* <Text style={styles.titleText}>Kies je route!</Text> */}
+      <Text style={styles.titleText}>EGR</Text> 
+      <Text style={styles.motto}>Verklein je ecologische voetafdruk </Text> 
+
+      <View style={styles.section}>
       <Text style={styles.inputFieldText}>Vertrekpunt</Text> 
      
       <GooglePlacesAutocomplete
@@ -191,6 +196,7 @@ export default function Home({ navigation }) {
       }}>
         <Text style={styles.textButton}>Go to the Map page</Text>
       </Text>
+      </View>
     </View>
   );
 }
@@ -202,25 +208,36 @@ const styles = StyleSheet.create({
     height: '100%',
     textAlign: 'center',
   },
+  section: {
+    width: Dimensions.get('screen').width,
+    height: Dimensions.get('screen').height
+  },
 
   titleText:{
-    fontSize: 28,
-    marginTop: 10,
-    marginBottom: 25,
-    marginLeft: 32, 
-    textAlign: 'left',
+    fontSize: 45,
+    textAlign: 'center',
     color: '#28D8A1',
+    fontWeight: 'bold',
     textShadowColor: 'rgba(40, 216, 116, 0.50)',
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 3
     ,
   },
 
-  inputFieldText: {
+  motto:{
     color: '#28D8A1',
-    marginLeft: 35,
+    textAlign: 'center',
+    marginBottom: 40,
+    fontWeight: 'bold',
+
+  },
+
+  inputFieldText: {
+    width: Dimensions.get('screen').width,
+    color: '#28D8A1',
     marginTop: 5,
     marginBottom: 6,
+    paddingLeft:20
   },
 
   textInputContainer: {
@@ -237,11 +254,9 @@ const styles = StyleSheet.create({
   
   button: {
     backgroundColor: '#28D8A1',
-
     alignSelf: 'center',
     textAlign: 'center',
     textAlignVertical: 'center',
-
     height: 40,
     margin: 12,
     padding: 10,
@@ -263,9 +278,9 @@ const styles = StyleSheet.create({
   },
 
   logoImage:{
-    marginTop: 100,
+    marginTop: 75,
     alignSelf: 'center',
-    marginBottom: 32,
+    marginBottom: 0,
     //marginLeft: 32,
     width: 89.6,
     height: 80,
