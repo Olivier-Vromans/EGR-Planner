@@ -4,11 +4,12 @@ import Clock from "../assets/clock.png"
 import Euro from "../assets/euro.png"
 import Co2 from "../assets/co2.png"
 
-const routeCard = ({ navigation, time, distance, mode }) => {
+const routeCard = ({ navigation, origin, destination, time, distance, mode, busDistance }) => {
     const url = "https://api.overheid.io/voertuiggegevens/"
     const key = "db354afa306f071e41b1d6f51d887ce59a0720102e361f2bf0fca9cf97b6117b"
 
     const km = distance / 1000
+    const kmBus = busDistance / 1000 
     let price = 0
     let co2 = 0
     let emission = 0
@@ -32,14 +33,15 @@ const routeCard = ({ navigation, time, distance, mode }) => {
     }
     let [hours, minutes, seconds] = secondsToHms(time)
 
-
+    if(mode === "transit"){
+        price = (0.155 * km) + 1.01
+        emission = Math.round(69.2 * kmBus)
+    }
     if (mode === "driving") {
         let fuelPrice = 2.29
         price = km / 12 * fuelPrice
-        console.log(price.toFixed(2))
 
         if (licensePlate) {
-            console.log(licensePlate);
             useEffect(() => {
                 const fetchData = async () => {
                     try {
@@ -69,29 +71,24 @@ const routeCard = ({ navigation, time, distance, mode }) => {
             if(!loading){
                 co2 = fuelDetails[0].co2_uitstoot_gecombineerd 
                 emission = Math.round(co2 * km)
-                console.log(emission);
             }
         }
 
     }
-    if(mode === "transit"){
-        price = (0.155 * km) + 1.01
-        // emission = Math.round(69.2 * km)
-        // console.log(emission)
-    }
+
 
 
     return (
         <TouchableOpacity style={styles.cardContainer} key={mode}
-        // onPress={() => {
-        //     navigation.navigate('Route', {
-        //         origin: "Zintele 4",
-        //         destination: "Wijnhaven 99",
-        //         mode: mode
-        //     })
-        // }}
+        onPress={() => {
+            navigation.navigate('Route', {
+                origin: origin,
+                destination: destination,
+                mode: mode
+            })
+        }}
         >
-            <Text> This is a Advice Card</Text>
+            <Text>This is a Advice Card</Text>
             {/* <Image
                 source={Clock}
                 style={styles.clock}
