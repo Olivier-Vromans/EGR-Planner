@@ -97,7 +97,6 @@ export default function Home({ navigation }) {
       />
       
       <Text style={styles.inputFieldText}>Bestemming</Text>
-      
       <GooglePlacesAutocomplete
       // Placeholder
       placeholder='Bestemming'
@@ -189,7 +188,7 @@ export default function Home({ navigation }) {
 
       <Text style={styles.button} onPress={() => {
         navigation.navigate('Advies', {
-          origin: "Bloementuin 8, naaldwijk",
+          origin: "Zintele 4",
           destination: "wijnhaven 99",
           licensePlate: "8kkr09"
         })
