@@ -9,6 +9,7 @@ export default function Advice({ route, navigation }) {
     const mode = ["driving", "transit", "bicycling", "walking"]
     const [routes, setRoutes] = useState([])
     const [busDistance, setBusDistance] = useState(0)
+    const [transitDistance , setTransitDistance] = useState(0)
 
     //Get the origin and destination from the home page
     let tempOrigin = navigation.getParam("origin")
@@ -32,23 +33,31 @@ export default function Advice({ route, navigation }) {
                     .then((responses) => Promise.all(responses.map((res) => res.json())))
                     .then(directionResults => {
                         let arr = [];
-                        let busArr = []
+                        let walking = 0
+                        let transit = 0
+                        let bus = 0
                         for (let directionResult of directionResults) {
                             for (let route of directionResult.routes) {
                                 for (let step of route.legs[0].steps) {
                                     if (step.travel_mode === "TRANSIT") {
+                                        // console.log(step.distance);
+                                        transit = transit + step.distance.value
                                         if (step.transit_details.line.vehicle.type === "BUS") {
-                                            console.log(step.transit_details.line.vehicle.type);
-                                            setBusDistance(busDistance + step.distance.value)
+                                            bus = bus + step.distance.value
                                         }
                                     }
+                                    if(step.travel_mode === "WALKING"){
+                                        walking = walking + step.distance.value
+                                    }
                                 }
-                                console.log(route.legs[0].duration.text)
                                 arr.push(route)
                             }
                         }
-                        // setBusTime(busArr)
+                        console.log(`Bus:` + busDistance);
+                        console.log(`transit: ` + transit);
                         setRoutes(arr)
+                        setBusDistance(bus)
+                        setTransitDistance(transit)
                     })
                     .then(setLoading(false))
             } catch (err) {
@@ -62,6 +71,7 @@ export default function Advice({ route, navigation }) {
     }, [])
 
     if (!loading) {
+        // console.log(walkingDistance);
         CardComponents = routes.map((route, index) => {
             return <Card
                 navigation={navigation}
@@ -70,8 +80,9 @@ export default function Advice({ route, navigation }) {
                 destination={destination}
                 time={route.legs[0].duration.value}
                 busDistance={busDistance}
+                transitDistance={transitDistance}
                 distance={route.legs[0].distance.value}
-                key={mode[index]}
+                key={index}
             >
             </Card>
         })

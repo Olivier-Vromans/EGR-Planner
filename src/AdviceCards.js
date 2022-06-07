@@ -1,17 +1,15 @@
 import { React, useEffect, useState } from "react"
 import { StyleSheet, Text, Dimensions, TouchableOpacity, Image } from "react-native"
-import Clock from "../assets/clock.png"
-import Euro from "../assets/euro.png"
-import Co2 from "../assets/co2.png"
 
-const routeCard = ({ navigation, origin, destination, time, distance, mode, busDistance }) => {
+const routeCard = ({ navigation, origin, destination, time, distance, mode, busDistance, transitDistance }) => {
     const url = "https://api.overheid.io/voertuiggegevens/"
     const key = "db354afa306f071e41b1d6f51d887ce59a0720102e361f2bf0fca9cf97b6117b"
 
     const km = distance / 1000
     const kmBus = busDistance / 1000 
+    const kmTransit = transitDistance / 1000
     let price = 0
-    let co2 = 0
+    let co2 = 130
     let emission = 0
     let licensePlate = navigation.getParam("licensePlate")
 
@@ -26,15 +24,15 @@ const routeCard = ({ navigation, origin, destination, time, distance, mode, busD
         let s = Math.floor(d % 3600 % 60);
 
         let hDisplay = h > 0 ? h : "";
-        let mDisplay = m > 0 ? m : "";
+        let mDisplay = m > 0 ? (m < 10 ? '0' : '') + m : "";
         let sDisplay = s > 0 ? s : "";
 
-        return [Number(hDisplay), Number(mDisplay), Number(sDisplay)]
+        return [Number(hDisplay), mDisplay, Number(sDisplay)]
     }
     let [hours, minutes, seconds] = secondsToHms(time)
 
     if(mode === "transit"){
-        price = (0.155 * km) + 1.01
+        price = (0.155 * kmTransit) + 1.01
         emission = Math.round(69.2 * kmBus)
     }
     if (mode === "driving") {
@@ -70,21 +68,24 @@ const routeCard = ({ navigation, origin, destination, time, distance, mode, busD
             }, [])
             if(!loading){
                 co2 = fuelDetails[0].co2_uitstoot_gecombineerd 
-                emission = Math.round(co2 * km)
             }
+        }else{
+            co2 = 109
         }
-
+        emission = Math.round(co2 * km)
     }
 
-
-
+    
     return (
-        <TouchableOpacity style={styles.cardContainer} key={mode}
+        <TouchableOpacity style={styles.cardContainer} key={key}
         onPress={() => {
             navigation.navigate('Route', {
                 origin: origin,
                 destination: destination,
-                mode: mode
+                mode: mode,
+                hours: hours,
+                minutes: minutes,
+                emission: emission
             })
         }}
         >
