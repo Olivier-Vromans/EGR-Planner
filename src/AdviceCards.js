@@ -1,5 +1,8 @@
 import { React, useEffect, useState } from "react"
-import { StyleSheet, Text, Dimensions, TouchableOpacity, Image } from "react-native"
+import { StyleSheet, Text, Dimensions, TouchableOpacity, Image, View } from "react-native"
+import { Ionicons } from '@expo/vector-icons'; 
+import { FontAwesome } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Clock from "../assets/clock.png"
 import Euro from "../assets/euro.png"
 import Co2 from "../assets/co2.png"
@@ -9,7 +12,7 @@ const routeCard = ({ navigation, origin, destination, time, distance, mode, busD
     const key = "db354afa306f071e41b1d6f51d887ce59a0720102e361f2bf0fca9cf97b6117b"
 
     const km = distance / 1000
-    const kmBus = busDistance / 1000 
+    const kmBus = busDistance / 1000
     let price = 0
     let co2 = 0
     let emission = 0
@@ -33,7 +36,7 @@ const routeCard = ({ navigation, origin, destination, time, distance, mode, busD
     }
     let [hours, minutes, seconds] = secondsToHms(time)
 
-    if(mode === "transit"){
+    if (mode === "transit") {
         price = (0.155 * km) + 1.01
         emission = Math.round(69.2 * kmBus)
     }
@@ -68,8 +71,8 @@ const routeCard = ({ navigation, origin, destination, time, distance, mode, busD
                 // call the async fetchData function
                 fetchData()
             }, [])
-            if(!loading){
-                co2 = fuelDetails[0].co2_uitstoot_gecombineerd 
+            if (!loading) {
+                co2 = fuelDetails[0].co2_uitstoot_gecombineerd
                 emission = Math.round(co2 * km)
             }
         }
@@ -77,48 +80,65 @@ const routeCard = ({ navigation, origin, destination, time, distance, mode, busD
     }
 
 
-
     return (
         <TouchableOpacity style={styles.cardContainer} key={mode}
-        onPress={() => {
-            navigation.navigate('Route', {
-                origin: origin,
-                destination: destination,
-                mode: mode
-            })
-        }}
+            onPress={() => {
+                navigation.navigate('Route', {
+                    origin: origin,
+                    destination: destination,
+                    mode: mode
+                })
+            }}
         >
-            <Text>This is a Advice Card</Text>
-            {/* <Image
-                source={Clock}
-                style={styles.clock}
-            /> */}
-            <Text>Tijd: {hours}:{minutes}</Text>
-            {/* <Image
-                source={Euro}
-                style={styles.euro}
-            /> */}
-            <Text>Prijs: € {price.toFixed(2).replace('.', ',')}</Text>
-            {/* <Image
-                source={Co2}
-                style={styles.co2}
-            /> */}
-            <Text>Uitstoot: {emission} gram</Text>
-            <Text>Afstand: {km.toFixed(1)} km</Text>
+                <View style={styles.time}>
+                    <Text style={styles.cardText}>12:21<Ionicons name="arrow-forward" size={24} color="black" />12:40</Text>
+                </View>
+                <View style={styles.info}>
+                    <Text><Ionicons name="md-time-outline" size={20} color="black" /> {hours}:{minutes}</Text>
+                    <Text><FontAwesome name="euro" size={20} color="black"/>{" "}{price.toFixed(2).replace('.', ',')}</Text>
+                    <Text><MaterialCommunityIcons name="molecule-co2" size={23} color="black" />{emission} gram</Text>
+                    <Text><MaterialCommunityIcons name="map-marker-distance" size={20} color="black" />{km.toFixed(1)} km</Text>
+                </View>
+                <View>
+                </View>
         </TouchableOpacity >
     )
 
-}
 
+}
 const deviceWidth = Math.round(Dimensions.get("window").width)
 const styles = StyleSheet.create({
+    cardText : {
+        fontSize: 20,
+        fontWeight: "bold",
+        paddingBottom: 35,
+    },
+
+    time:{
+        // backgroundColor:"green",
+    },
+
+    info:{
+        // backgroundColor:"blue",
+        flexDirection: 'row',
+        justifyContent: "space-between",
+    },
+
     cardContainer: {
+        marginBottom: 20,
+        // alignSelf: "center",
+        backgroundColor: "#DDDDDD",
         alignSelf: "center",
-        backgroundColor: "#fff",
-        width: deviceWidth - 40,
-        height: 150,
-        borderRadius: 10,
-        marginTop: 20
+        width: deviceWidth - 50,
+        padding: 20,
+        height: 125,
+        borderTopRightRadius: 5,
+        borderBottomRightRadius: 5,
+        borderLeftWidth: 15,
+        borderStyle: 'solid',
+        borderLeftColor: '#28D8A0',
+        marginTop: 10,
+
     },
     clock: {
         width: 25,
