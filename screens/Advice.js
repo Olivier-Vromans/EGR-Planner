@@ -78,7 +78,7 @@ export default function Advice({ route, navigation }) {
                 mode={mode[index]}
                 origin={origin}
                 destination={destination}
-                time={route.legs[0].duration.value}
+                travelTime={route.legs[0].duration.value}
                 busDistance={busDistance}
                 transitDistance={transitDistance}
                 distance={route.legs[0].distance.value}

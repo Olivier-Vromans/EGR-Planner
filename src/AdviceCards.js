@@ -7,10 +7,13 @@ import Clock from "../assets/clock.png"
 import Euro from "../assets/euro.png"
 import Co2 from "../assets/co2.png"
 
-const routeCard = ({ navigation, origin, destination, time, distance, mode, busDistance, transitDistance }) => {
+const routeCard = ({ navigation, origin, destination, travelTime, distance, mode, busDistance, transitDistance }) => {
     const url = "https://api.overheid.io/voertuiggegevens/"
     const key = "db354afa306f071e41b1d6f51d887ce59a0720102e361f2bf0fca9cf97b6117b"
-
+    const [hours, minutes, seconds] = secondsToHms(travelTime)
+    const [time, setTime] = useState(null);
+    const [arriveTime, setArriveTime] = useState(null)
+    
     const km = distance / 1000
     const kmBus = busDistance / 1000 
     const kmTransit = transitDistance / 1000
@@ -22,6 +25,19 @@ const routeCard = ({ navigation, origin, destination, time, distance, mode, busD
     const [loading, setLoading] = useState(true)
     const [fuelDetails, setfuelDetails] = useState([])
 
+    useEffect(() => {
+      let time = getCurrentTime()
+      let arriveTime = getCurrentTime()
+      setTime(time);
+    }, []);
+    
+    const getCurrentTime = () => {
+        let today = new Date();
+        let hours = (today.getHours() < 10 ? '0' : '') + today.getHours();
+        let minutes = (today.getMinutes() < 10 ? '0' : '') + today.getMinutes();
+        let seconds = (today.getSeconds() < 10 ? '0' : '') + today.getSeconds();
+        return hours + ':' + minutes;
+      }
 
     function secondsToHms(d) {
         d = Number(d)
@@ -35,7 +51,6 @@ const routeCard = ({ navigation, origin, destination, time, distance, mode, busD
 
         return [Number(hDisplay), mDisplay, Number(sDisplay)]
     }
-    let [hours, minutes, seconds] = secondsToHms(time)
     if(mode === "transit"){
         price = (0.155 * kmTransit) + 1.01
         emission = Math.round(69.2 * kmBus)
@@ -94,7 +109,7 @@ const routeCard = ({ navigation, origin, destination, time, distance, mode, busD
         }}
         >
                 <View style={styles.time}>
-                    <Text style={styles.cardText}>12:21<Ionicons name="arrow-forward" size={24} color="black" />12:40</Text>
+                    <Text style={styles.cardText}>{time}<Ionicons name="arrow-forward" size={24} color="black" />{}</Text>
                 </View>
                 <View style={styles.info}>
                     <Text><Ionicons name="md-time-outline" size={20} color="black" /> {hours}:{minutes}</Text>

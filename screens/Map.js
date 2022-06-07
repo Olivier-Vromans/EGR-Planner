@@ -11,7 +11,6 @@ export default function Map({ route, navigation }) {
     //Get the origin and destination from the home page
     let tempOrigin = navigation.getParam("origin")
     let temoDestination = navigation.getParam("destination")
-
     // tempOrigin = "zintele 4"
     // add %20 instead of space and end with .json for the api
     const mode = navigation.getParam("mode")

@@ -196,6 +196,7 @@ export default function Home({ navigation }) {
         <Text style={styles.textButton}>Go to the Map page</Text>
       </Text>
       </View>
+      <StatusBar style="dark" />
     </View>
   );
 }
