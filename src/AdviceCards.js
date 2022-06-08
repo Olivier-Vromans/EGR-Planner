@@ -3,9 +3,6 @@ import { StyleSheet, Text, Dimensions, TouchableOpacity, Image, View } from "rea
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Clock from "../assets/clock.png"
-import Euro from "../assets/euro.png"
-import Co2 from "../assets/co2.png"
 import co2Prediction from "./Predict.js";
 
 const routeCard = ({ navigation, origin, destination, travelTime, distance, mode, busDistance, transitDistance }) => {
