@@ -3,10 +3,7 @@ import { StyleSheet, Text, Dimensions, TouchableOpacity, Image, View } from "rea
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-<<<<<<< HEAD
 import co2Prediction from "./Predict.js";
-=======
->>>>>>> b335b5c4ac434b44132ff1b5213d62a76dca3685
 
 const routeCard = ({ navigation, origin, destination, travelTime, distance, mode, busDistance, transitDistance }) => {
     const url = "https://api.overheid.io/voertuiggegevens/"
