@@ -3,11 +3,14 @@ import { StyleSheet, Text, Dimensions, TouchableOpacity, Image, View } from "rea
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+<<<<<<< HEAD
 import co2Prediction from "./Predict.js";
+=======
+>>>>>>> b335b5c4ac434b44132ff1b5213d62a76dca3685
 
 const routeCard = ({ navigation, origin, destination, travelTime, distance, mode, busDistance, transitDistance }) => {
     const url = "https://api.overheid.io/voertuiggegevens/"
-    const key = "db354afa306f071e41b1d6f51d887ce59a0720102e361f2bf0fca9cf97b6117b"
+    const key = "98464c5cfe29b4613fca96699ce6ad2edc9faef966876a0099347c6d26e3764"
     const [hours, minutes, seconds] = secondsToHms(travelTime)
     const [time, setTime] = useState(null);
 

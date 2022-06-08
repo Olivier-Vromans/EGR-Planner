@@ -6,19 +6,19 @@
 //     const [classifier, setClassifier] = useState(null);
 //     const [loadStatus, setLoadStatus] = useState(true);
 
-//     // useEffect(() => {
-//     //     let neuralNetwork;
-//     //     featureExtractor = ml5.neuralNetwork({task: "regression", debug:true}), () => modelLoaded());
-//     //     const modelLoaded = () => {
-//     //         console.log("neuralNetwork data is Loaded!");
-//     //         neuralNetwork.load("./model.json", () => {
-//     //             console.log("the garbage model is also loaded");
-//     //             const classifier = neuralNetwork.classification();
-//     //             setClassifier(classifier);
-//     //             setLoadStatus(false);
-//     //         });
-//     //     };
-//     // }, []);
+    // useEffect(() => {
+    //     let neuralNetwork;
+    //     featureExtractor = ml5.neuralNetwork({task: "regression", debug:true}), () => modelLoaded());
+    //     const modelLoaded = () => {
+    //         console.log("neuralNetwork data is Loaded!");
+    //         neuralNetwork.load("./model.json", () => {
+    //             console.log("the garbage model is also loaded");
+    //             const classifier = neuralNetwork.classification();
+    //             setClassifier(classifier);
+    //             setLoadStatus(false);
+    //         });
+    //     };
+    // }, []);
 
 //     loadModel()
 // }
