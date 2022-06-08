@@ -29,7 +29,7 @@ export default function Map({ route, navigation }) {
     switch (mode) {
         case "driving":
             advice = "We adviseren u om met de AUTO te gaan."
-            emissionText = "Hierdoor bespaart u tot wel " + Math.round(emission * 100) / 100 + " kg CO2! \n\n Wilt u toch nog met de auto gaan houd er dan rekening mee dat het de toekomst van je kinderen kan kosten om je rit " + minutes + " min korter te laten duren"
+            emissionText = "Hierdoor bespaart u tot wel " + Math.round(emission * 100) / 100 + " kg CO2! \n\n Wilt u toch nog met de auto gaan, houdt er dan rekening mee dat het de toekomst van uw kinderen kan kosten om je rit " + minutes + " minuten korter te laten duren."
             break
         case "transit":
             advice = "We adviseren u om met het OV te gaan."
@@ -112,7 +112,7 @@ export default function Map({ route, navigation }) {
                                     setModalVisible(!modalVisible)
                                 }}
                             >
-                                <Text style={styles.buttonText}>Okey!!</Text>
+                                <Text style={styles.buttonText}>Start route!</Text>
                             </Pressable>
                         </View>
                     </View>
