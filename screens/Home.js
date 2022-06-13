@@ -11,7 +11,10 @@ export default function Home({ navigation }) {
 
   console.log(origin);
   return (
-    <ScrollView keyboardShouldPersistTaps='always' listViewDisplayed={false}>
+    <ScrollView 
+      keyboardShouldPersistTaps='always' 
+      listViewDisplayed={false}
+      horizontal={true}>
       <KeyboardAvoidingView enabled>
         <View style={styles.homeWrapper}>
           <Image

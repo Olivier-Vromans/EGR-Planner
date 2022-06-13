@@ -51,22 +51,13 @@ export default function Map({ route, navigation }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const result = await fetch(GeocodeUrl + origin + "&key=" + api)
-                const body = await result.json()
-                setOriginGeoCode(body.results[0].geometry.location)
-            } catch (err) {
+                const resultOrigin = await fetch(GeocodeUrl + origin + "&key=" + api)
+                const bodyOrigin = await resultOrigin.json()
+                setOriginGeoCode(bodyOrigin.results[0].geometry.location)
+                const resultDestination = await fetch(GeocodeUrl + destination + "&key=" + api)
+                const bodyDestination = await resultDestination.json()
+                setDestinationGeoCode(bodyDestination.results[0].geometry.location)
 
-            }
-        }
-        // call the async fetchData function
-        fetchData()
-    }, [])
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const result = await fetch(GeocodeUrl + destination + "&key=" + api)
-                const body = await result.json()
-                setDestinationGeoCode(body.results[0].geometry.location)
             } catch (err) {
 
             }
