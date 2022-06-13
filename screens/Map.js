@@ -28,18 +28,18 @@ export default function Map({ route, navigation }) {
 
     switch (mode) {
         case "driving":
-            advice = "We adviseren u om met de AUTO te gaan."
-            emissionText = "Hierdoor bespaart u tot wel " + Math.round(emission * 100) / 100 + " kg CO2! \n\n Wilt u toch nog met de auto gaan, houdt er dan rekening mee dat het de toekomst van uw kinderen kan kosten om je rit " + minutes + " minuten korter te laten duren."
+            advice = "Met dit advies reist u met de AUTO"
+            emissionText = "Bah! Hiermee stoot u tot wel " + Math.round(emission * 100) / 100 + " kg CO2 uit! \n\n Weet u zeker dat u met de auto wil? Houd er dan rekening mee dat de toekomst van uw kinderen hieronder kan lijden!"
             break
         case "transit":
-            advice = "We adviseren u om met het OV te gaan."
+            advice = "Met dit advies reist u met het OV"
             break
         case "bicycling":
-            advice = "We adviseren u om met de FIETS te gaan."
+            advice = "Met dit advies reist u met de FIETS"
             emissionText = "U bent goed bezig, dit is de groenste route. Met deze route stoot u geen C02 uit en krijgt u sneller een summerbody!"
             break
         case "walking":
-            advice = "We adviseren u om TE VOET te gaan."
+            advice = "Met dit advies reist u TE VOET"
             emissionText = "U bent goed bezig, dit is de groenste route. Met deze route stoot u geen C02 uit en krijgt u sneller een summerbody!"
             break
     }
