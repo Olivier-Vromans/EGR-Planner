@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, Dimensions, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, ScrollView, KeyboardAvoidingView} from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import leaf from '../assets/leaf.png'
 
@@ -11,10 +11,7 @@ export default function Home({ navigation }) {
 
   console.log(origin);
   return (
-    <ScrollView 
-      keyboardShouldPersistTaps='always' 
-      listViewDisplayed={false}
-      horizontal={true}>
+    <ScrollView keyboardShouldPersistTaps='always' listViewDisplayed={false}>
       <KeyboardAvoidingView enabled>
         <View style={styles.homeWrapper}>
           <Image
