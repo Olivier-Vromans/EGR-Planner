@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, Dimensions, SafeAreaView, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import leaf from '../assets/leaf.png'
 
@@ -11,19 +11,20 @@ export default function Home({ navigation }) {
 
   console.log(origin);
   return (
-    <ScrollView keyboardShouldPersistTaps='always' listViewDisplayed={false}>      
-    <View style={styles.homeWrapper}>
-      <Image
-        source={leaf}
-        style={styles.logoImage}
-      />
+    <ScrollView keyboardShouldPersistTaps='always' listViewDisplayed={false}>
+      <KeyboardAvoidingView enabled>
+        <View style={styles.homeWrapper}>
+          <Image
+            source={leaf}
+            style={styles.logoImage}
+          />
 
-      {/* <Text style={styles.titleText}>Kies je route!</Text> */}
-      <Text style={styles.titleText}>EGR</Text>
-      <Text style={styles.motto}>Verklein je ecologische voetafdruk </Text>
+          {/* <Text style={styles.titleText}>Kies je route!</Text> */}
+          <Text style={styles.titleText}>EGR Planner</Text>
+          <Text style={styles.motto}>Verklein je ecologische voetafdruk </Text>
 
-      <View style={styles.section}>
-        
+          <View style={styles.section}>
+
             <Text style={styles.inputFieldText}>Vertrekpunt</Text>
             <GooglePlacesAutocomplete
               // Placeholder
@@ -96,109 +97,101 @@ export default function Home({ navigation }) {
               }}
             />
 
-        <Text style={styles.inputFieldText}>Bestemming</Text>
-        <GooglePlacesAutocomplete
-          // Placeholder
-          placeholder='Bestemming'
-          // Minimal text length before prediction
-          minLength={1}
-          // what is the return
-          returnKeyType={'done'}
-          // fetch extra details
-          fetchDetails={true}
-          // 	displays the result from autocomplete if the place details api return not found
-          autoFillOnNotFound={true}
-          // hides "powered by Google" at the bottom of the search results list
-          enablePoweredByContainer={false}
-          // removes all default styling from the library
-          suppressDefaultStyles={true}
-          // the onPress handler
-          onPress={(data, details = null) => {
-            // 'details' is provided when fetchDetails = true
-            onChangeDestination(data.description)
-          }}
-          query={{
-            key: 'AIzaSyADZtwlvQuxxtgjZ6YcSyDQdC7KKq0A3pY',
-            language: 'nl',
-          }}
-          styles={{
-            container: {
-              flex: 0,
-            },
-            textInputContainer: {
-              height: 40,
-              margin: 12,
-              marginTop: 0,
-              //borderWidth: 1,
-              padding: 10,
-              minWidth: 350,
-              maxWidth: 350,
-              borderBottomWidth: 1,
-              //borderRadius: 4,
-              borderColor: '#ececec',
-              alignSelf: 'center',
-            },
-            poweredContainer: {
-              alignItems: 'center',
-              borderBottomRightRadius: 5,
-              borderBottomLeftRadius: 5,
-              borderColor: '#c8c7cc',
-              borderTopWidth: 0.5,
-            },
-            powered: {},
-            listView: {
-              alignSelf: 'center',
-              minWidth: 350,
-              maxWidth: 350,
-            },
-            row: {
-              backgroundColor: '#FFFFFF',
-              padding: 13,
-              height: 45,
-              flexDirection: 'row',
-            },
-            separator: {
-              height: 0.5,
-              backgroundColor: '#c8c7cc',
-            },
-            description: {},
-            loader: {
-              flexDirection: 'row',
-              justifyContent: 'flex-end',
-              height: 20,
-            },
-          }}
-        />
-        <Text style={styles.button} onPress={() => {
-          //Check if origin and destination is not empty
-          if (origin !== '' && destination !== '') {
-            //Navigate to the Route route with params
-            navigation.navigate('Advies', {
-              origin: origin,
-              destination: destination,
-              licensePlate: licensePlate,
-            })
-          }
-          else {
-            console.log('empty input')
-          }
-        }}>
-          <Text style={styles.textButton}>Vertrek!</Text>
-        </Text>
+            <Text style={styles.inputFieldText}>Bestemming</Text>
+            <GooglePlacesAutocomplete
+              // Placeholder
+              placeholder='Bestemming'
+              // Minimal text length before prediction
+              minLength={1}
+              // what is the return
+              returnKeyType={'done'}
+              // fetch extra details
+              fetchDetails={true}
+              // 	displays the result from autocomplete if the place details api return not found
+              autoFillOnNotFound={true}
+              // hides "powered by Google" at the bottom of the search results list
+              enablePoweredByContainer={false}
+              // removes all default styling from the library
+              suppressDefaultStyles={true}
+              // the onPress handler
+              onPress={(data, details = null) => {
+                // 'details' is provided when fetchDetails = true
+                onChangeDestination(data.description)
+              }}
+              query={{
+                key: 'AIzaSyADZtwlvQuxxtgjZ6YcSyDQdC7KKq0A3pY',
+                language: 'nl',
+              }}
+              styles={{
+                container: {
+                  flex: 0,
+                },
+                textInputContainer: {
+                  height: 40,
+                  margin: 12,
+                  marginTop: 0,
+                  //borderWidth: 1,
+                  padding: 10,
+                  minWidth: 350,
+                  maxWidth: 350,
+                  borderBottomWidth: 1,
+                  //borderRadius: 4,
+                  borderColor: '#ececec',
+                  alignSelf: 'center',
+                },
+                poweredContainer: {
+                  alignItems: 'center',
+                  borderBottomRightRadius: 5,
+                  borderBottomLeftRadius: 5,
+                  borderColor: '#c8c7cc',
+                  borderTopWidth: 0.5,
+                },
+                powered: {},
+                listView: {
+                  alignSelf: 'center',
+                  minWidth: 350,
+                  maxWidth: 350,
+                },
+                row: {
+                  backgroundColor: '#FFFFFF',
+                  padding: 13,
+                  height: 45,
+                  flexDirection: 'row',
+                },
+                separator: {
+                  height: 0.5,
+                  backgroundColor: '#c8c7cc',
+                },
+                description: {},
+                loader: {
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                  height: 20,
+                },
+              }}
+            />
+            <Text style={styles.button} onPress={() => {
+              //Check if origin and destination is not empty
+              if (origin !== '' && destination !== '') {
+                //Navigate to the Route route with params
+                navigation.navigate('Advies', {
+                  origin: origin,
+                  destination: destination,
+                  licensePlate: licensePlate,
+                })
+              }
+              else {
+                console.log('empty input')
+              }
+            }}>
+              <Text style={styles.textButton}>Vertrek!</Text>
+            </Text>
 
-        <Text style={styles.button} onPress={() => {
-          navigation.navigate('Advies', {
-            origin: "Zintele 4",
-            destination: "wijnhaven 99",
-            licensePlate: "8kkr09"
-          })
-        }}>
-          <Text style={styles.textButton}>Go to the Map page</Text>
-        </Text>
-      </View>
-      <StatusBar style="dark" />
-    </View>
-      </ScrollView>
+          </View>
+          <StatusBar style="dark" />
+        </View>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 }
 

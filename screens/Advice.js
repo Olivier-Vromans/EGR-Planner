@@ -93,14 +93,6 @@ export default function Advice({ route, navigation }) {
             {loading ? <ActivityIndicator size="large" /> :
                 <View>
                     {CardComponents}
-                    {/* <Text>{JSON.stringify(routes)}</Text> */}
-                    <Button title="Go to the Map page" onPress={() => {
-                        navigation.navigate('Route', {
-                            origin: origin,
-                            destination: destination,
-                            mode: mode[0]
-                        })
-                    }} />
                 </View>
             }
             <StatusBar style="dark" />
