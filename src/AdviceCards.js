@@ -5,7 +5,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
-const routeCard = ({ navigation, origin, destination, travelTime, distance, mode, busDistance, transitDistance, overheidKey }) => {
+const routeCard = ({ navigation, origin, destination, travelTime, distance, mode, busDistance, transitDistance, overheidKey, googleKey }) => {
     const url = "https://api.overheid.io/voertuiggegevens/"
     const key = overheidKey
     const [hours, minutes, seconds] = secondsToHms(travelTime)
@@ -101,7 +101,8 @@ const routeCard = ({ navigation, origin, destination, travelTime, distance, mode
                     mode: mode,
                     hours: hours,
                     minutes: minutes,
-                    emission: emission
+                    emission: emission,
+                    googleKey: googleKey
                 })
             }}
         >

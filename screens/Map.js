@@ -45,7 +45,7 @@ export default function Map({ route, navigation }) {
     }
 
     // variables for the api key and url's
-    const api = "AIzaSyADZtwlvQuxxtgjZ6YcSyDQdC7KKq0A3pY"
+    const api = navigation.getParam("googleKey").substring(5)
     const GeocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json?address="
 
     useEffect(() => {

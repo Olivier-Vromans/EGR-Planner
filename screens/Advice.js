@@ -22,12 +22,12 @@ export default function Advice({ route, navigation }) {
 
     const url = "https://maps.googleapis.com/maps/api/directions/json?"
     const params = `origin=${origin}&destination=${destination}`
-    const key = "&key=" + navigation.getParam("googleKey")
+    const googleKey = "&key=" + navigation.getParam("googleKey")
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const urls = mode.map(travelMode => url + params + "&mode=" + travelMode + key)
+                const urls = mode.map(travelMode => url + params + "&mode=" + travelMode + googleKey)
                 console.log(urls);
                 await Promise.all(urls.map(url => fetch(url)))
                     .then((responses) => Promise.all(responses.map((res) => res.json())))
@@ -80,6 +80,7 @@ export default function Advice({ route, navigation }) {
                 distance={route.legs[0].distance.value}
                 key={index}
                 overheidKey={navigation.getParam("overheidKey")}
+                googleKey={googleKey}
             >
             </Card>
         })
