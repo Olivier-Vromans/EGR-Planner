@@ -5,9 +5,9 @@ import { FontAwesome } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
-const routeCard = ({ navigation, origin, destination, travelTime, distance, mode, busDistance, transitDistance }) => {
+const routeCard = ({ navigation, origin, destination, travelTime, distance, mode, busDistance, transitDistance, overheidKey }) => {
     const url = "https://api.overheid.io/voertuiggegevens/"
-    const key = "98464c5cfe29b4613fca96699ce6ad2edc9faef966876a0099347c6d26e3764"
+    const key = overheidKey
     const [hours, minutes, seconds] = secondsToHms(travelTime)
     const [time, setTime] = useState(null);
 
@@ -71,7 +71,6 @@ const routeCard = ({ navigation, origin, destination, travelTime, distance, mode
                                 let arr = []
                                 for (let fuelResult of fuelResults.brandstof) {
                                     arr.push(fuelResult)
-                                    // console.log(fuelResult)
                                 }
                                 setfuelDetails(arr)
                             })
@@ -90,7 +89,6 @@ const routeCard = ({ navigation, origin, destination, travelTime, distance, mode
         emission = Math.round(co2 * km)
     }
 
-    // console.log(hours);
     const d = new Date(); // get current date
     d.setHours(d.getHours(), d.getMinutes(), d.getSeconds() + travelTime)
 

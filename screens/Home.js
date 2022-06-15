@@ -5,11 +5,12 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import leaf from '../assets/leaf.png'
 
 export default function Home({ navigation }) {
+  const googleKey = process.env.googleApi
+  const overheidKey = process.env.overheidKey
   const [origin, onChangeOrigin] = React.useState(String);
   const [destination, onChangeDestination] = React.useState(String);
   const [licensePlate, setLicensePlate] = React.useState(String);
 
-  console.log(origin);
   return (
     <ScrollView keyboardShouldPersistTaps='always' listViewDisplayed={false}>
       <KeyboardAvoidingView enabled>
@@ -178,6 +179,8 @@ export default function Home({ navigation }) {
                   origin: origin,
                   destination: destination,
                   licensePlate: licensePlate,
+                  googleKey: googleKey,
+                  overheidKey: overheidKey
                 })
               }
               else {

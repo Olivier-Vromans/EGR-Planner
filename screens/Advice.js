@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, SafeAreaView, ActivityIndicator, FlatList, View, Button } from 'react-native';
+import { SafeAreaView, ActivityIndicator, View } from 'react-native';
 import Card from "../src/AdviceCards.js"
 let CardComponents
 
@@ -22,7 +22,7 @@ export default function Advice({ route, navigation }) {
 
     const url = "https://maps.googleapis.com/maps/api/directions/json?"
     const params = `origin=${origin}&destination=${destination}`
-    const key = "&key=AIzaSyADZtwlvQuxxtgjZ6YcSyDQdC7KKq0A3pY"
+    const key = "&key=" + navigation.getParam("googleKey")
 
     useEffect(() => {
         const fetchData = async () => {
@@ -40,7 +40,6 @@ export default function Advice({ route, navigation }) {
                             for (let route of directionResult.routes) {
                                 for (let step of route.legs[0].steps) {
                                     if (step.travel_mode === "TRANSIT") {
-                                        // console.log(step.distance);
                                         transit = transit + step.distance.value
                                         if (step.transit_details.line.vehicle.type === "BUS") {
                                             bus = bus + step.distance.value
@@ -53,8 +52,6 @@ export default function Advice({ route, navigation }) {
                                 arr.push(route)
                             }
                         }
-                        console.log(`Bus:` + busDistance);
-                        console.log(`transit: ` + transit);
                         setRoutes(arr)
                         setBusDistance(bus)
                         setTransitDistance(transit)
@@ -71,7 +68,6 @@ export default function Advice({ route, navigation }) {
     }, [])
 
     if (!loading) {
-        // console.log(walkingDistance);
         CardComponents = routes.map((route, index) => {
             return <Card
                 navigation={navigation}
@@ -83,6 +79,7 @@ export default function Advice({ route, navigation }) {
                 transitDistance={transitDistance}
                 distance={route.legs[0].distance.value}
                 key={index}
+                overheidKey={navigation.getParam("overheidKey")}
             >
             </Card>
         })
