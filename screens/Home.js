@@ -3,14 +3,15 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, Dimensions, ScrollView, KeyboardAvoidingView} from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import leaf from '../assets/leaf.png'
+import {overheidApi, googleApi} from '@env'
 
 export default function Home({ navigation }) {
-  const googleKey = process.env.googleApi
-  const overheidKey = process.env.overheidKey
+  const googleKey = googleApi
+  const overheidKey = overheidApi
   const [origin, onChangeOrigin] = React.useState(String);
   const [destination, onChangeDestination] = React.useState(String);
   const [licensePlate, setLicensePlate] = React.useState(String);
-
+  
   return (
     <ScrollView keyboardShouldPersistTaps='always' listViewDisplayed={false}>
       <KeyboardAvoidingView enabled>
@@ -48,7 +49,7 @@ export default function Home({ navigation }) {
                 onChangeOrigin(data.description)
               }}
               query={{
-                key: 'AIzaSyADZtwlvQuxxtgjZ6YcSyDQdC7KKq0A3pY',
+                key: googleKey,
                 language: 'nl',
               }}
               styles={{
@@ -120,7 +121,7 @@ export default function Home({ navigation }) {
                 onChangeDestination(data.description)
               }}
               query={{
-                key: 'AIzaSyADZtwlvQuxxtgjZ6YcSyDQdC7KKq0A3pY',
+                key: googleKey,
                 language: 'nl',
               }}
               styles={{
